@@ -9,5 +9,10 @@ package com.mycompany.practicaarquitecturas.modelo;
  * @author SUPERTRONICA
  */
 public interface Humano {
+    // 2 cosas puede tener
+    //1 constante = final y un valor
+    //metodos declarados no implementados termina en ;
+    
+    public void identificacion();
     
 }
