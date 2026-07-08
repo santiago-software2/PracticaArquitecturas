@@ -38,7 +38,7 @@ public class Pais {
 
     @Override
     public String toString() {
-        return "Pais{" + "nombre=" + nombre + ", capital=" + capital + '}';
+        return "----Pais----" +"\n" + "nombre=" + nombre + "\n capital=" + capital + '}';
     }
 
    

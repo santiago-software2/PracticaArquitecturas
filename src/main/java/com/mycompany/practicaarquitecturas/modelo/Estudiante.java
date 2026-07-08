@@ -33,14 +33,63 @@ public class Estudiante extends Persona{
 
     @Override
     public String toString() {
-        return "Estudiante{" + "idEstudiante=" + idEstudiante + '}';
+        return "---Estudiante---" + "\n" + "Nombres:" + getNombre() + "\n"+
+               "Apellidos:" + getApellido() + "\n" + 
+               "Cedula:" + getCedula() + "\n" +
+                getDireccion();
     }
 
     @Override
     public void identificacion() {
-        System.out.print("Clase Estudiante");
+        System.out.print("Clase estudiante");
+    }
+    
+    public boolean validarCedula(String cedula) {
+        if (cedula.length() != 10) {
+        System.out.println("La cédula debe tener exactamente 10 dígitos.");
+        return false;
+    }
+        int numero;
+    
+    try {
+        numero = Integer.parseInt(cedula);
+    } 
+    catch (NumberFormatException e) {
+        System.out.println("Solo se permiten números en la cédula.");
+        return false;
+    }
+    
+    int contador = 0;
+    int copia = numero;
+    
+    
+    while (copia > 0) {
+        contador = contador + 1;
+        copia = copia / 10;
+    }
+    
+    int provincia = numero / 100000000;
+    
+    if (provincia > 24 && provincia != 30) {
+        System.out.println("Cédula inválida.");
+        return false;
+    }
+    
+    if (provincia < 1 && contador == 10) { 
+        System.out.println("Cédula inválida: Provincia incorrecta.");
+        return false;
     }
     
     
+    if (contador == 10 || contador == 9) {
+        return true;
+    } 
+    else {
+        System.out.println("La cédula debe tener 10 dígitos.");
+        return false;
+    }
+    
+    
+}
     
 }
