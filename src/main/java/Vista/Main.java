@@ -8,6 +8,7 @@ import Controlador.PaisControlador;
 import com.mycompany.practicaarquitecturas.modelo.Pais;
 import javax.swing.JOptionPane;
 import controlador.ConexionBDD;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,12 +18,12 @@ public class Main {
 
     public static void main(String[] args) {
         //objeto pais"
-          Pais p = new Pais();
-          p.setNombre(JOptionPane.showInputDialog("Ingrese el nombre del pais: "));
-          p.setCapital(JOptionPane.showInputDialog("Ingrese el nombre de la capital: "));
-          
-          PaisControlador p1 = new PaisControlador();
-          p1.insertarPais(p);
+//          Pais p = new Pais();
+//          p.setNombre(JOptionPane.showInputDialog("Ingrese el nombre del pais: "));
+//          p.setCapital(JOptionPane.showInputDialog("Ingrese el nombre de la capital: "));
+//          
+//          PaisControlador p1 = new PaisControlador();
+//          p1.insertarPais(p);
 //
 //        //objeto de direecion
 //        Direccion d = new Direccion();
@@ -74,11 +75,16 @@ public class Main {
         prueba.conectar();
         
         
-        }  
-        
-        
-        
+        PaisControlador controlador = new PaisControlador();
+        ArrayList<String[]> lPais = controlador.obtenerPaises();
+
+        System.out.println("Lista de países:");
+        for (String[] pais : lPais) {
+            System.out.println("ID: " + pais[0] + " Nombre: " + pais[1] + " Capital: " + pais[2]);
+        }
     }
+        
+}   
     
     
    

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import controlador.ConexionBDD;
+import java.util.ArrayList;
 /**
  *
  * @author SUPERTRONICA
@@ -55,6 +56,27 @@ public class PaisControlador {
         
     }
     
-    
+     public ArrayList<String[]> obtenerPaises() {
+        ArrayList<String[]> lregistros = new ArrayList<>();
+        try {
+            String sentenciaSQL = "select *from pais;";
+            ejecutar = conectado.prepareCall(sentenciaSQL);
+            ResultSet res = ejecutar.executeQuery();
+            
+            while (res.next()) {
+                String[] listaPaises = new String[3];
+                listaPaises[0] = res.getInt("idPais") + "";
+                listaPaises[1] = res.getString("nombre");
+                listaPaises[2] = res.getString("capital");
+                lregistros.add(listaPaises);
+            }
+             ejecutar.close();
+            conectado.close();
+            return lregistros;
+        } catch (SQLException e) {
+            System.out.println("------" + e);
+        }
+            return lregistros;
+    }
     
 }
