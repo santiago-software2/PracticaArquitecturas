@@ -11,6 +11,7 @@ package com.mycompany.practicaarquitecturas.modelo;
 public class Pais {
     private String nombre;
     private String capital;
+    private int id;
 
     public Pais() {
     }
@@ -28,6 +29,10 @@ public class Pais {
         return capital;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -36,12 +41,14 @@ public class Pais {
         this.capital = capital;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "----Pais----" +"\n" + "nombre=" + nombre + "\n capital=" + capital + '}';
-    }
-
-   
+    }   
     
     
 }

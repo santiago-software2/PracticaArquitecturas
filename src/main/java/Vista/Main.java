@@ -75,13 +75,25 @@ public class Main {
         prueba.conectar();
         
         
-        PaisControlador controlador = new PaisControlador();
-        ArrayList<String[]> lPais = controlador.obtenerPaises();
-
-        System.out.println("Lista de países:");
-        for (String[] pais : lPais) {
-            System.out.println("ID: " + pais[0] + " Nombre: " + pais[1] + " Capital: " + pais[2]);
-        }
+//        PaisControlador controlador = new PaisControlador();
+//        ArrayList<String[]> lPais = controlador.obtenerPaises();
+//
+//        System.out.println("Lista de países:");
+//        for (String[] pais : lPais) {
+//            System.out.println("ID: " + pais[0] + " Nombre: " + pais[1] + " Capital: " + pais[2]);
+//        }
+        
+        //actualizar
+        PaisControlador controlador1 = new PaisControlador();
+        Pais paisAct = new Pais();
+        paisAct.setId(9);
+        paisAct.setNombre("Estador Unidos");
+        paisAct.setCapital("Washinton D.C");
+        controlador1.actualizarPais(paisAct);
+        
+        //eliminar
+        controlador1.eliminarPais(26);
+        
     }
         
 }   

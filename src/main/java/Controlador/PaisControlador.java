@@ -78,5 +78,53 @@ public class PaisControlador {
         }
             return lregistros;
     }
+     
+     //update
+     public void actualizarPais(Pais p) {
+         try {
+             String sentenciaSQL = "update pais set nombre = '" + p.getNombre()
+                     + "', capital = '" + p.getCapital() 
+                     + "' where idPais = " + p.getId() + ";";
+             ejecutar = conectado.prepareCall(sentenciaSQL);
+             
+             int res = ejecutar.executeUpdate();
+             if (res > 0) {
+                 JOptionPane.showMessageDialog(null, "Pais actualizado");
+             }
+             else {
+                 JOptionPane.showMessageDialog(null, "No se encontro el pais");
+             }
+             ejecutar.close();
+             conectado.close();
+                 
+         }
+         catch(SQLException e) {
+             JOptionPane.showMessageDialog(null, "Comuniquese con el administrador para obtener ayuda");
+             System.out.println("--------" + e); 
+                     
+         }
+     }
+     
+     //delete
+     public void eliminarPais(int id) {
+         try {
+             String sentenciaSQL = "delete from pais where idPais = " + id + ";";
+             ejecutar = conectado.prepareCall(sentenciaSQL);
+             
+             int res = ejecutar.executeUpdate();
+             if(res > 0) {
+                 JOptionPane.showMessageDialog(null, "Pais eliminado");
+             }
+             else {
+                 JOptionPane.showMessageDialog(null, "No se borro ningun pais");
+             }
+             ejecutar.close();
+             conectado.close();
+             
+         } catch(SQLException e) {
+             JOptionPane.showMessageDialog(null, "Comuniquese con el administrador");
+             System.out.println("--------" + e);  
+         }
+     }
     
 }
