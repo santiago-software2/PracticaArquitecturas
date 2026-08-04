@@ -4,7 +4,9 @@
  */
 package Vista;
 
+import Controlador.DireccionControlador;
 import Controlador.PaisControlador;
+import com.mycompany.practicaarquitecturas.modelo.Direccion;
 import com.mycompany.practicaarquitecturas.modelo.Pais;
 import javax.swing.JOptionPane;
 import controlador.ConexionBDD;
@@ -18,21 +20,102 @@ public class Main {
 
     public static void main(String[] args) {
         //objeto pais"
+        //Insertar pais
 //          Pais p = new Pais();
 //          p.setNombre(JOptionPane.showInputDialog("Ingrese el nombre del pais: "));
 //          p.setCapital(JOptionPane.showInputDialog("Ingrese el nombre de la capital: "));
-//          
+//       
 //          PaisControlador p1 = new PaisControlador();
 //          p1.insertarPais(p);
-//
-//        //objeto de direecion
-//        Direccion d = new Direccion();
-//        d.setCalle("Bolivar");
-//        d.setCiudad("Ibarra");
-//        d.setCodPostal(100100);
-//        d.setPais(p);
-//        System.out.print(d.toString());
+
+        //Mostrar pais
+//          PaisControlador controlador = new PaisControlador();
+//          ArrayList<String[]> lPais = controlador.obtenerPaises();
+//          Object[] nombre = new Object[lPais.size()];
+//        
+//            int i = 0;
+//            for(String[] pais : lPais){ 
+//            nombre[i] = pais[1]; 
+//            i++;
+//        }    
+//        
+//        String paisElegido = (String) JOptionPane.showInputDialog(null,
+//        "Ingrese su país",
+//        "Lista de Países",
+//        JOptionPane.QUESTION_MESSAGE,
+//        null,
+//        nombre,
+//        nombre[0]);
+//        JOptionPane.showInternalMessageDialog(null, "Pais seleccionado: " + paisElegido);
+
+//        System.out.println("Lista de países:");
+//        for (String[] pais : lPais) {
+//          System.out.println("ID: " + pais[0] + " Nombre: " + pais[1] + " Capital: " + pais[2]);
+
+            //actualizar
+//        PaisControlador controlador1 = new PaisControlador();
+////        Pais paisAct = new Pais();
+////        paisAct.setId(26);
+////        paisAct.setCapital("Urcuyork");
+////        paisAct.setNombre("Urcuquí");
+////        controlador1.actualizarPais(paisAct);
+////        
+////        //eliminar
+//          controlador1.eliminarPais(25);      
+
+        //objeto de direccion
+        //Crear direccion
+        Direccion d1 = new Direccion();
+        d1.setCalle(JOptionPane.showInputDialog("Ingrese el nombre de la calle: "));
+        d1.setCiudad(JOptionPane.showInputDialog("Ingrese el nombre de la ciudad: "));
         
+//        String codigop = JOptionPane.showInputDialog("Ingrese el codigo postal: ");
+//        int codPostal = Integer.parseInt(codigop);
+//        d1.setCodPostal(codPostal);
+        
+        d1.setCodPostal(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el codigo postal: ")));
+        
+        
+        String idP = JOptionPane.showInputDialog("Ingrese el id del pais: ");
+        int idPais = Integer.parseInt(idP);
+        Pais p1 = new Pais();
+        p1.setId(idPais);
+        d1.setPais(p1);
+
+        DireccionControlador dc = new DireccionControlador();
+        dc.insertarDireccion(d1);
+        
+        //Motsrar direcciones
+        DireccionControlador dc1 = new DireccionControlador();
+        ArrayList<String[]> lDireccion = dc1.obtenerDirecciones();
+        Object[] nombre = new Object[lDireccion.size()];
+        
+            int i = 0;
+            for(String[] direccion : lDireccion){ 
+            nombre[i] = direccion[1]; 
+            i++;
+        }    
+        
+        String direccionElegida = (String) JOptionPane.showInputDialog(null,
+        "Ingrese su direccion",
+        "Lista de Direcciones",
+        JOptionPane.QUESTION_MESSAGE,
+        null,
+        nombre,
+        nombre[0]);
+        JOptionPane.showInternalMessageDialog(null, "Direccion seleccionada: " + direccionElegida);
+        
+        
+        //Actualizar direcciones
+        DireccionControlador dc2 = new DireccionControlador();
+        Direccion direccionAct = new Direccion();
+        direccionAct.setIdDireccion(10);
+        direccionAct.setCalle("Tobias Mena");
+        dc2.actualizarDireccion(direccionAct);
+        
+        //Eliminar direccion
+        DireccionControlador dc3 = new DireccionControlador();
+        dc3.eliminarDireccion(10);  
         
          //Estudiante
 //        Estudiante e = new Estudiante();
@@ -71,29 +154,9 @@ public class Main {
 //        JOptionPane.showMessageDialog(null, "Cédula inválida.");
         
         
-        ConexionBDD prueba = new ConexionBDD();
-        prueba.conectar();
-        
-        
-//        PaisControlador controlador = new PaisControlador();
-//        ArrayList<String[]> lPais = controlador.obtenerPaises();
-//
-//        System.out.println("Lista de países:");
-//        for (String[] pais : lPais) {
-//            System.out.println("ID: " + pais[0] + " Nombre: " + pais[1] + " Capital: " + pais[2]);
-//        }
-        
-        //actualizar
-        PaisControlador controlador1 = new PaisControlador();
-        Pais paisAct = new Pais();
-        paisAct.setId(9);
-        paisAct.setNombre("Estador Unidos");
-        paisAct.setCapital("Washinton D.C");
-        controlador1.actualizarPais(paisAct);
-        
-        //eliminar
-        controlador1.eliminarPais(26);
-        
+//        ConexionBDD prueba = new ConexionBDD();
+//        prueba.conectar();
+   
     }
         
 }   

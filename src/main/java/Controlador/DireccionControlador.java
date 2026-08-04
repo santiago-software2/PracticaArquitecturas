@@ -4,20 +4,20 @@
  */
 package Controlador;
 
-import com.mycompany.practicaarquitecturas.modelo.Pais;
+import com.mycompany.practicaarquitecturas.modelo.Direccion;
+import controlador.ConexionBDD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import controlador.ConexionBDD;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author SUPERTRONICA
  */
-public class PaisControlador {
-   
+public class DireccionControlador {
     //INSTANCIAR LA CONEXIÓN A LA BASE DE DATOS
     ConexionBDD conectar = new ConexionBDD();
     //CLASE QUE ME PERMITA CONECTARME DIRECTAMENTE A MYSQL
@@ -26,23 +26,24 @@ public class PaisControlador {
     PreparedStatement ejecutar;
     //OBTENER RESULTADOS DE LA CONSULTA, PARECIDA A LAS LISTAS
     ResultSet resultado;
-
-    //MÉTODOS DE TRANSACCIONABILIDAD
-    public void insertarPais(Pais p) {
+    
+    //METODOS DE TRANSACCIONABILIDAD
+    public void insertarDireccion(Direccion d1) {
         //1.- UTILIZAR EXCEPCIÓN
         try {//LANZAR TESTEAR UN CONJUNTO DE CÓDIGO 
-            String sentenciaSQL = "INSERT INTO pais(nombre,capital)values "
-                    + "('" + p.getNombre() + "','" + p.getCapital() + "');";
+            String sentenciaSQL = "INSERT INTO direccion (calle,ciudad,codPostal,idPais) values "
+                    + "('" + d1.getCalle() + "','" + d1.getCiudad() +  "'," + d1.getCodPostal() + 
+                    "," + d1.getPais().getId() + ");";
             ejecutar = conectado.prepareCall(sentenciaSQL);
             //TODA INSERCIÓN DEVUELVE UN ESTADO >0 CUANDO FUE FAVORABLE Y MENOR A O CUANDO NO SE REALIZÓ 
             int res = ejecutar.executeUpdate();
             if (res > 0) {
                 JOptionPane.showMessageDialog(null, 
-                        "País Creado con éxito");
+                        "Direccion Creada con éxito");
                 ejecutar.close();
             } else {
                 JOptionPane.showMessageDialog(null, 
-                        "El País no ha sido creado,"
+                        "La Direccion no ha sido creada,"
                         + " revise que los datos ingresados sean correctos");
             }
             conectado.close();
@@ -56,19 +57,21 @@ public class PaisControlador {
         
     }
     
-     public ArrayList<String[]> obtenerPaises() {
+    public ArrayList<String[]> obtenerDirecciones() {
         ArrayList<String[]> lregistros = new ArrayList<>();
         try {
-            String sentenciaSQL = "select *from pais;";
+            String sentenciaSQL = "select *from direccion;";
             ejecutar = conectado.prepareCall(sentenciaSQL);
             ResultSet res = ejecutar.executeQuery();
             
             while (res.next()) {
-                String[] listaPaises = new String[3];
-                listaPaises[0] = res.getInt("idPais") + "";
-                listaPaises[1] = res.getString("nombre");
-                listaPaises[2] = res.getString("capital");
-                lregistros.add(listaPaises);
+                String[] listaDirecciones = new String[5];
+                listaDirecciones[0] = res.getString("idDireccion");
+                listaDirecciones[1] = res.getString("calle");
+                listaDirecciones[2] = res.getString("ciudad");
+                listaDirecciones[3] = res.getString("codPostal");
+                listaDirecciones[4] = res.getString("idPais");
+                lregistros.add(listaDirecciones);
             }
              ejecutar.close();
             conectado.close();
@@ -78,20 +81,19 @@ public class PaisControlador {
         }
             return lregistros;
     }
-     
-     //update
-     public void actualizarPais(Pais p) {
+    
+    public void actualizarDireccion(Direccion d2) {
          try {
-             String sentenciaSQL = "update pais set capital = '" + p.getCapital() + "' "
-                     + " where idPais = '" + p.getId() + "';";
+             String sentenciaSQL = "update direccion set calle = '" + d2.getCalle() + "' "
+                     + " where idDireccion = '" + d2.getIdDireccion() + "';";
              ejecutar = conectado.prepareCall(sentenciaSQL);
              
              int res = ejecutar.executeUpdate();
              if (res > 0) {
-                 JOptionPane.showMessageDialog(null, "Pais actualizado");
+                 JOptionPane.showMessageDialog(null, "Direccion actualizada");
              }
              else {
-                 JOptionPane.showMessageDialog(null, "No se encontro el pais");
+                 JOptionPane.showMessageDialog(null, "No se encontro la direccion");
              }
              ejecutar.close();
              conectado.close();
@@ -103,19 +105,18 @@ public class PaisControlador {
                      
          }
      }
-     
-     //delete
-     public void eliminarPais(int id) {
+    
+    public void eliminarDireccion(int idDireccion) {
          try {
-             String sentenciaSQL = "delete from pais where idPais = " + id + ";";
+             String sentenciaSQL = "delete from direccion where idDireccion = " + idDireccion + ";";
              ejecutar = conectado.prepareCall(sentenciaSQL);
              
              int res = ejecutar.executeUpdate();
              if(res > 0) {
-                 JOptionPane.showMessageDialog(null, "Pais eliminado");
+                 JOptionPane.showMessageDialog(null, "Direccion eliminada");
              }
              else {
-                 JOptionPane.showMessageDialog(null, "No se borro ningun pais");
+                 JOptionPane.showMessageDialog(null, "No se borro ninguna direccion");
              }
              ejecutar.close();
              conectado.close();
@@ -125,5 +126,4 @@ public class PaisControlador {
              System.out.println("--------" + e);  
          }
      }
-    
 }

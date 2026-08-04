@@ -13,16 +13,18 @@ public class Direccion {
     private String ciudad;
     private int codPostal;
     private Pais pais;
+    private int idDireccion;
 
     public Direccion() {
     }
 
     
-    public Direccion(String calle, String ciudad, int codPostal, Pais pais) {
+    public Direccion(String calle, String ciudad, int codPostal, Pais pais, int idDireccion) {
         this.calle = calle;
         this.ciudad = ciudad;
         this.codPostal = codPostal;
         this.pais = pais;
+        this.idDireccion = idDireccion;
     }
 
     public String getCalle() {
@@ -48,13 +50,23 @@ public class Direccion {
     public void setCodPostal(int codPostal) {
         this.codPostal = codPostal;
     }
+    
+    public Pais getPais() {
+        return pais;
+    }
 
     public void setPais(Pais pais) {
         this.pais = pais;
     }
-    
-    
 
+    public int getIdDireccion() {
+        return idDireccion;
+    }
+    
+    public void setIdDireccion(int idDireccion) {
+        this.idDireccion = idDireccion;
+    }
+    
     @Override
     public String toString() {
         return "----Direccion----" + "\n" + 
